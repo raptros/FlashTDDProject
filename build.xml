@@ -9,6 +9,9 @@
 	<!-- Set up FlexUnit Ant tasks -->
 	<taskdef resource="flexUnitTasks.tasks" classpath="${lib.loc}/flexUnitTasks.jar" />
 
+	<!-- Add the ant-contrib tasks -->
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties" classpath="${lib.loc}/ant-contrib.jar" />
+
 	<target name="usage">
 		<echo message="" />
 		<echo message="${project.name} Build Usage" />
@@ -103,9 +106,6 @@
 
 	<!-- Opens JUnit Report when test fails -->
 	<target name="junitreport" depends="test" if="flexunit.failed">
-		<!--		<exec executable="open">
-			<arg line="-a ${browser} ${report.url}" />
-			</exec>-->
 		<exec executable="${browser}">
 			<arg line="file://${report.url}" />
 		</exec>
@@ -175,11 +175,8 @@
 	</target>
 
 	<target name="local-test" depends="compile-swf" if="autolaunch.url">
-		<!--<exec executable="open">
-			<arg line="-a ${browser} ${bin.loc}/index.html" />
-		</exec>-->
 		<exec executable="${browser}">
-			<arg line="file://${report.url}" />
+			<arg line="file://${bin.loc}/index.html" />
 		</exec>
 	</target>
 
