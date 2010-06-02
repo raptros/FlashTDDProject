@@ -12,7 +12,6 @@
 	<!-- Add the ant-contrib tasks -->
 	<taskdef resource="net/sf/antcontrib/antcontrib.properties" classpath="${lib.loc}/ant-contrib.jar" />
 
-	<include file="${includes.loc}/clean.xml" />
 	<include file="${includes.loc}/misc.xml" />
 	<include file="${includes.loc}/test.xml" />
 	<include file="${includes.loc}/asdoc.xml" />
@@ -20,11 +19,9 @@
 
 	<target name="usage" depends="misc.usage" />
 
-	<target name="init" depends="clean.init" />
-	
-	<target name="test" depends="init,test.run" />
+	<target name="test" depends="test.run" />
 
-	<target name="compile" depends="init">
+	<target name="compile">
 		<!-- check mode, figure out which compile to use, and whether to run or not-->
 		<runtarget target="compile.compile-swf" />
 	</target>

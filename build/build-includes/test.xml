@@ -3,9 +3,31 @@
 	<!-- This file is only for inclusion in the main buildscript.
 	It contains all of the testing targets -->
 
+	<target name="clean-folders">
+		<if>
+			<available type="dir" file="${report.loc}" />
+			<then>
+				<delete includeemptydirs="true" failonerror="false">
+					<fileset dir="${report.loc}" defaultexcludes="false">
+						<include name="**/*" />
+					</fileset>
+				</delete>
+			</then>
+			<else>
+				<mkdir dir="${report.loc}" />
+			</else>
+		</if>
+		<if>
+			<not><available type="dir" file="${bin.loc}" /></not>
+			<then>
+				<mkdir dir="${bin.loc}" />
+			</then>
+		</if>
+	</target>
+
+
 	<!-- Compiles TestRunner.mxml as a SWF -->
 	<target name="build">
-		<mkdir dir="${report.loc}" />
 
 		<java jar="${FLEX_HOME}/lib/mxmlc.jar" dir="${FLEX_HOME}/frameworks" fork="true" failonerror="true">
 			<arg value="${test.src.loc}/${project.name}TestApp.mxml" />

@@ -1,7 +1,25 @@
 <?xml version="1.0"?>
 <project name="compile" basedir="." default="local-run">
 
-	<target name="setup-bin">
+	<target name="clean-bin">
+		<!-- Remove all directories created during the build process -->
+		<if>
+			<available type="dir" file="${bin.loc}" />
+			<then>
+				<delete includeemptydirs="true" failonerror="false">
+					<fileset dir="${bin.loc}" defaultexcludes="false">
+						<include name="**/*" />
+					</fileset>
+				</delete>
+			</then>
+			<else>
+				<mkdir dir="${bin.loc}" />
+			</else>
+		</if>
+	</target>
+
+
+	<target name="setup-bin" depends="clean-bin">
 		<sync todir="${bin.loc}">
 			<fileset dir="${basedir}/build/bin-resources" />
 		</sync>

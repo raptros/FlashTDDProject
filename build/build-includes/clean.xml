@@ -4,14 +4,27 @@
 	<target name="clean">
 		<!-- Remove all directories created during the build process -->
 		<echo>[clean] Removing Build and Report directories</echo>
-		<delete includeemptydirs="true" failonerror="false">
-			<fileset dir="${report.loc}" defaultexcludes="false">
-				<include name="**/*" />
-			</fileset>
-			<fileset dir="${dist.loc}" defaultexcludes="false">
-				<include name="**/*" />
-			</fileset>
-		</delete>
+		<if>
+			<available type="dir" file="${report.loc}" />
+			<then>
+				<delete includeemptydirs="true" failonerror="false">
+					<fileset dir="${report.loc}" defaultexcludes="false">
+						<include name="**/*" />
+					</fileset>
+				</delete>
+				<echo>Removed report directory ${report.loc}</echo>
+			</then>
+		</if>
+		<if>
+			<available type="dir" file="${bin.loc}" />
+			<then>
+				<delete includeemptydirs="true" failonerror="false">
+					<fileset dir="${bin.loc}" defaultexcludes="false">
+						<include name="**/*" />
+					</fileset>
+				</delete>
+			</then>
+		</if>
 		<echo>[clean] Build and Report directories removed</echo>
 	</target>
 
