@@ -12,14 +12,15 @@
 	<!-- Add the ant-contrib tasks -->
 	<taskdef resource="net/sf/antcontrib/antcontrib.properties" classpath="${lib.loc}/ant-contrib.jar" />
 
-	<include file="${basedir}/build/base.xml" />
-	<include file="${basedir}/build/test.xml" />
-	<include file="${basedir}/build/asdoc.xml" />
-	<include file="${basedir}/build/compile.xml" />
+	<include file="${includes.loc}/clean.xml" />
+	<include file="${includes.loc}/misc.xml" />
+	<include file="${includes.loc}/test.xml" />
+	<include file="${includes.loc}/asdoc.xml" />
+	<include file="${includes.loc}/compile.xml" />
 
-	<target name="usage" depends="base.usage" />
+	<target name="usage" depends="misc.usage" />
 
-	<target name="init" depends="base.init" />
+	<target name="init" depends="clean.init" />
 	
 	<target name="test" depends="init,test.run" />
 
