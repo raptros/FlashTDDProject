@@ -82,7 +82,14 @@
 		</java>
 
 		<!-- Execute TestRunner.swf as FlexUnit tests and publish reports -->
-		<flexunit swf="bin/TestRunner.swf" toDir="${report.loc}" haltonfailure="false" verbose="true" localTrusted="true" failureproperty="flexunit.failed" />
+		<flexunit swf="bin/TestRunner.swf" 
+			toDir="${report.loc}" 
+			haltonfailure="false" 
+			verbose="true" 
+			localTrusted="true" 
+			failureproperty="flexunit.failed"
+			timeout="5000"
+		       	/>
 		<!-- Generate readable JUnit-style reports -->
 		<junitreport todir="${report.loc}">
 			<fileset dir="${report.loc}">
@@ -96,8 +103,11 @@
 
 	<!-- Opens JUnit Report when test fails -->
 	<target name="junitreport" depends="test" if="flexunit.failed">
-		<exec executable="open">
+		<!--		<exec executable="open">
 			<arg line="-a ${browser} ${report.url}" />
+			</exec>-->
+		<exec executable="${browser}">
+			<arg line="file://${report.url}" />
 		</exec>
 		<fail>Unit Tests Failed</fail>
 	</target>
@@ -165,8 +175,11 @@
 	</target>
 
 	<target name="local-test" depends="compile-swf" if="autolaunch.url">
-		<exec executable="open">
+		<!--<exec executable="open">
 			<arg line="-a ${browser} ${bin.loc}/index.html" />
+		</exec>-->
+		<exec executable="${browser}">
+			<arg line="file://${report.url}" />
 		</exec>
 	</target>
 

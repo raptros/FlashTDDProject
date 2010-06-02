@@ -19,3 +19,30 @@ file).
 
 Once the bin folder is setup, the browser will attempt to launch the index.html
 file and let you preview your swf.
+
+Working on windows (vista):
+Once you have ant, flashbuilder, and the build.properties all set up nicely, 
+there are several problems you might run into.
+
+The first thing to check is to make sure that the folder
+ C:\Windows\System32\Macromed\Flash\FlashPlayerTrust\
+is NOT readonly, and that the user has permission to write into the folder.
+You'll have to do this if you see some IOError (access denied) message from the
+flexunit task. Flexunit needs to write here to communicate with the swf.
+
+Second, make sure that the standalone player that is running is Flash Player 10.
+If it's not, search your system for FlashPlayer.exe and look for results in paths 
+including the word Players. Download the update from adobe, and replace the Players
+ folder in the system with the one in the update. This will fix a problem where the
+ TestRunner isn't able to talk to the flexunit listener.
+
+Lastly, you'll probably want to see the generated flexunit report in your browser. 
+If you use firefox, you'll want to set the browser variable in build.properties to 
+C:/Program Files/Mozilla Firefox/firefox.exe
+or wherever firefox is installed. For other browser, figure out where they're installed,
+and put the path in that file. Remember, always use forward slashes. 
+The original build.xml was clearly created by a mac lover, because he made the exec use
+"open" which is a mac thing. Instead, the executable for us is ${browser} and the arg line
+is file://${report.url} because firefox needs a protocol (in this case file://) to open
+stuff up. 
+
