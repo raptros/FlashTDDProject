@@ -60,10 +60,9 @@
             <jvmarg line="-ea -DAS3 -DAVMPLUS -Dflexlib=${FLEX_HOME}/frameworks -Xms32m -Xmx384m -Dsun.io.useCanonCaches=false"/>
             <arg line="'${bin.loc}/${project.name.versioned}.swf' --output '${bin.loc}/${deploy.name.versioned}.swf' "/>
         </java>
-        <move file="${bin.loc}/${deploy.name.versioned}.swf" tofile="${lib.deploy.dir}/${deploy.name.versioned}.swf"/>
     </target>
 
-    <target name="deploy" depends="convert-to-swf" if="run.swflib.deploy">
-        <move file="${bin.loc}/${project.name.versioned}.swf" tofile="${lib.deploy.dir}/${deploy.name.versioned}.swf"/>
+    <target name="deploy" depends="optimize">
+        <move file="${bin.loc}/${deploy.name.versioned}.swf" tofile="${lib.deploy.dir}/${project.name.versioned}.swf"/>
     </target>
 </project>

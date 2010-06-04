@@ -47,8 +47,9 @@
 
     <target name="deploy-to-emulator" depends="package-apk">
         <exec executable="${adb}">
-            <arg value="-s"/>
-            <arg value="emulator-5556"/>
+            <!--          <arg value="-s"/>
+            <arg value="emulator-5556"/>-->
+            <arg value="-e"/>
             <arg value="install"/>
             <arg value="${bin.loc}/${project.name.versioned}.apk"/>
         </exec>
